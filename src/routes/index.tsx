@@ -22,7 +22,7 @@ function Index() {
   const [natural, setNatural] = useState("");
   const [fallback, setFallback] = useState(false);
   const navigate = Route.useNavigate();
-  const search = () => navigate({ to: "/search", search: { type: tab } });
+  const search = () => navigate({ to: "/search" });
   return (
     <AppShell>
       <main className="overflow-hidden">
