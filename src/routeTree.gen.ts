@@ -15,6 +15,7 @@ import { Route as ConfirmationRouteImport } from './routes/confirmation'
 import { Route as HoldRouteImport } from './routes/hold'
 import { Route as HotelRouteImport } from './routes/hotel'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as VisualizerRouteImport } from './routes/visualizer'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VisualizerRoute = VisualizerRouteImport.update({
+  id: '/visualizer',
+  path: '/visualizer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/hold': typeof HoldRoute
   '/hotel': typeof HotelRoute
   '/search': typeof SearchRoute
+  '/visualizer': typeof VisualizerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/hold': typeof HoldRoute
   '/hotel': typeof HotelRoute
   '/search': typeof SearchRoute
+  '/visualizer': typeof VisualizerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,27 @@ export interface FileRoutesById {
   '/hold': typeof HoldRoute
   '/hotel': typeof HotelRoute
   '/search': typeof SearchRoute
+  '/visualizer': typeof VisualizerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/bookings' | '/confirmation' | '/hold' | '/hotel' | '/search'
+    | '/'
+    | '/bookings'
+    | '/confirmation'
+    | '/hold'
+    | '/hotel'
+    | '/search'
+    | '/visualizer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bookings' | '/confirmation' | '/hold' | '/hotel' | '/search'
+  to:
+    | '/'
+    | '/bookings'
+    | '/confirmation'
+    | '/hold'
+    | '/hotel'
+    | '/search'
+    | '/visualizer'
   id:
     | '__root__'
     | '/'
@@ -86,6 +108,7 @@ export interface FileRouteTypes {
     | '/hold'
     | '/hotel'
     | '/search'
+    | '/visualizer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +118,7 @@ export interface RootRouteChildren {
   HoldRoute: typeof HoldRoute
   HotelRoute: typeof HotelRoute
   SearchRoute: typeof SearchRoute
+  VisualizerRoute: typeof VisualizerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/visualizer': {
+      id: '/visualizer'
+      path: '/visualizer'
+      fullPath: '/visualizer'
+      preLoaderRoute: typeof VisualizerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   HoldRoute: HoldRoute,
   HotelRoute: HotelRoute,
   SearchRoute: SearchRoute,
+  VisualizerRoute: VisualizerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
